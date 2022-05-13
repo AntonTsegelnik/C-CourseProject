@@ -9,6 +9,10 @@ void Expeditor::createGoods(std::list<Goods>& test)
 	std::cin >> n;
 	switch (n) {
 	case 1: {
+
+
+
+
 		Liquids product;
 		std::cout << "Идентификационный номер:";
 		product.setId(); std::cout << std::endl;

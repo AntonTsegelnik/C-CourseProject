@@ -5,7 +5,8 @@
 class Expeditor :
     public User
 {
-    void createGoods(std::list<Goods>&test);
+public:
+    //void createGoods(std::list<Goods>&test);
     void addGoodsToBuilding();
     int getMenyType();
 };

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+
 class Storage
 {
 private:
@@ -20,7 +21,7 @@ private:
 public:
 
     Storage();
-    void login();
+    int login();
     void addUser();
     void saveFile(string p_line, const char* p_fileName, const int& id);
 };

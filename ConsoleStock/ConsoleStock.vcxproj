@@ -158,6 +158,7 @@
     <ClInclude Include="Building.h" />
     <ClInclude Include="Expeditor.h" />
     <ClInclude Include="Goods.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Liquids.h" />
     <ClInclude Include="Retail.h" />
     <ClInclude Include="Stock.h" />

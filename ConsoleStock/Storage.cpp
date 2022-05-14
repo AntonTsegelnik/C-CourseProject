@@ -78,33 +78,49 @@ Storage::Storage()
 {
     accessGranted = 0;
 }
-void Storage::login()
+int  Storage::login()
 {
     cout << "Логин:";
     cin >> userNameAttempt;
+    if (userNameAttempt == "admin") {
+        int usrID = checkFile(userNameAttempt, "admin.dat");
+        if (usrID != 0)
+        {
+            cout << "Пароль:";
+            cin >> userNameAttempt;
+            int pwdID = checkFile(userNameAttempt, "adminpsw.dat");
+            if (usrID == pwdID)
+            {
+                cout << "Добро Пожаловать! \n" << endl;;
+                //login();
+                return 0;
+            }
+        }
+    }
 
-    int usrID = checkFile(userNameAttempt, "users.dat");
-    if (usrID != 0)
+    int UsrID = checkFile(userNameAttempt, "user.dat");
+    if (UsrID != 0)
     {
         cout << "Пароль:";
         cin >> passwordAttempt;
+       
 
-        int pwdID = checkFile(passwordAttempt, "pswds.dat");
-        if (usrID == pwdID)
+        int PwdID = checkFile(passwordAttempt, "password.dat");
+        if (UsrID == PwdID)
         {
             cout << "Добро Пожаловать! \n" << endl;;
             //login();
-
+            return 1;
         }
         else
         {
-            cout << "Неверный пароль" << endl;
+            cout << "Неверный пароль!" << endl;
             login();
         }
     }
     else
     {
-        cout << "Хорошая попытка:)\n Такого пользователя не существует" << endl;
+        cout << "Такого пользователя не существует!" << endl;
         login();
     }
 }
@@ -117,15 +133,15 @@ void Storage::addUser()
     cout << endl;
     cout << "Создать пароль:";
     cin >> password;
-    if (checkFile(username, "users.dat") != 0)
+    if (checkFile(username, "user.dat") != 0)
     {
         cout << "Это имя пользователя недоступно." << endl;
         return;
     }
 
     int id = 1 + getLastID();
-    saveFile(username, "users.dat", id);
-    saveFile(password, "pswds.dat", id);
+    saveFile(username, "user.dat", id);
+    saveFile(password, "password.dat", id);
 }
 void Storage::saveFile(string p_line, const char* p_fileName, const int& id)
 {

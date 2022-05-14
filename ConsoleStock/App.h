@@ -8,10 +8,11 @@
 
 class App
 {	
-	std::list<User> Users;
+
 	std::list<Goods> goods;
 	std::list<Building> buildings;
 	
+	void authorithation();
 };
 
 

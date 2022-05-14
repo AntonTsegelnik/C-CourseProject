@@ -1,6 +1,6 @@
 #pragma once
 class User
 {
-	virtual User getMenyType() = 0;
+	virtual int getMenyType() = 0;
 };
 

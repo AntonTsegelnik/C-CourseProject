@@ -53,3 +53,8 @@ void Expeditor::addGoodsToBuilding()
 {
 
 }
+
+int Expeditor::getMenyType()
+{
+	return 1;
+}

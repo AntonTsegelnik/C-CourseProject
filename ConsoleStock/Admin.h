@@ -3,6 +3,6 @@
 class Admin :
     public User
 {
-    
+    int getMenyType();
 };
 

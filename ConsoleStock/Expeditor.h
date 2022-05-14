@@ -7,6 +7,6 @@ class Expeditor :
 {
     void createGoods(std::list<Goods>&test);
     void addGoodsToBuilding();
-
+    int getMenyType();
 };
 

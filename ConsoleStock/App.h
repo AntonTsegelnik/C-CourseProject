@@ -7,10 +7,10 @@
 #include "Expeditor.h"
 #include "Storage.h"
 
+
 class App
 {	
-
-//	std::list<Goods> goods;
+	std::list<Goods> goods;
 //	std::list<Building> buildings;
 	Storage _storage;
 public:

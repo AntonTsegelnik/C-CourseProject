@@ -1,5 +1,6 @@
 #include "Goods.h"
 #include <iostream>
+#include "Input.h"
 
 int Goods::getId()
 {
@@ -8,7 +9,22 @@ int Goods::getId()
 
 void Goods::setId()
 {
-	std::cin >> id;
+	INPUT_CONDITION
+	(
+		std:: cout << "Идентификационный номер:",
+		id,
+		id >= 0,
+	);
+}
+
+std::string Goods::getType()
+{
+	return type;
+}
+
+void Goods::setType(std::string g)
+{
+	type = g;
 }
 
 std::string Goods::getName()
@@ -17,7 +33,8 @@ std::string Goods::getName()
 }
 
 void Goods::setName()
-{
+{	
+	std::cout << "Наименование:",
 	getline(std::cin, name);
 }
 
@@ -28,7 +45,12 @@ double Goods::getAmount()
 
 void Goods::setAmount()
 {
-	std::cin >> amount;
+	INPUT_CONDITION
+	(
+		std::cout << "Количество:",
+		amount,
+		amount >= 0,
+		);
 }
 
 std::string Goods::getAdmissionDate()
@@ -38,6 +60,7 @@ std::string Goods::getAdmissionDate()
 
 void Goods::setAdmissionDate()
 {
+	std::cout << "Дата поступления на склад:";
 	getline(std::cin, admissionDate);
 }
 
@@ -48,6 +71,7 @@ std::string Goods::getShelfLife()
 
 void Goods::setShelfLife()
 {
+	std::cout << "Истечение срока годности:";
 	getline(std::cin, shelfLife);
 }
 
@@ -58,5 +82,10 @@ int Goods::getBuildingId()
 
 void Goods::setBuildingId()
 {
-	std::cin >> buildingId;
+	INPUT_CONDITION
+	(
+		std::cout << "Идентификационный номер склада:",
+		buildingId,
+		buildingId >= 0,
+		);
 }

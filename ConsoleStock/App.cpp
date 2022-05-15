@@ -42,9 +42,15 @@ void App::run()
 			switch (choice)
 			{
 			case 1:
-				cout << "HI 1" << endl;
+				usr.createGoods(goods);
+				cin.get();
+				system("cls");
 				break;
-				
+			case 2:
+				usr.showGoods(goods);
+				cin.get();
+				system("cls");
+				break;
 			case 0:
 				exit = true;
 			}
@@ -81,7 +87,7 @@ void App::showMenu(int x, int &choice)
 			std::cout
 			<< "\t\tМеню\n"
 			<< "\t*****************************************************\n"
-			<< "\t1. Добавление данных в отчет\n"
+			<< "\t1. Создать товар в базе данных\n"
 			<< "\t2. Вывод отчета\n"
 			<< "\t3. Удаление данных из отчета\n"
 			<< "\t4. Редактирование содержимого\n"

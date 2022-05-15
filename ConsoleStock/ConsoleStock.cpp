@@ -1,5 +1,6 @@
 ﻿
 #include <iostream>
+#include <iomanip>
 #include "windows.h"
 #include "Liquids.h"
 #include <list>
@@ -12,6 +13,7 @@ int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
+  
 	App app;
 	app.run();
 }

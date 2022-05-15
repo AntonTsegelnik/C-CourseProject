@@ -8,13 +8,14 @@
 #include "Storage.h"
 
 
+
 class App
 {	
-	std::list<Goods> goods;
-//	std::list<Building> buildings;
+	std::list<std::unique_ptr<Goods>> goods;
+	//std::list<std::unique_ptr<Building>> buildings;
 	Storage _storage;
 public:
-	int authorithation();
+	int authorization();
 	void run();
 	void showMenu(int x, int&choice);
 };

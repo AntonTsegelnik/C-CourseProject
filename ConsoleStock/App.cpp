@@ -2,7 +2,7 @@
 #include "Admin.h"
 #include "Input.h"
 
-int App::authorithation()
+int App::authorization()
 {
 
 	return _storage.login();
@@ -15,11 +15,11 @@ void App::run()
 	int choice;
 	bool exit = false;
 
-	if (authorithation() == 0) {
+	if (authorization() == 0) {
 		Admin admin;
 		while (!exit)
 		{
-			showMenu(admin.getMenyType(), choice);
+			showMenu(admin.getMenuType(), choice);
 
 			switch (choice)
 			{
@@ -37,12 +37,13 @@ void App::run()
 		
 		while (!exit)
 		{
-			showMenu(usr.getMenyType(), choice);
+			showMenu(usr.getMenuType(), choice);
 		
 			switch (choice)
 			{
 			case 1:
 				usr.createGoods(goods);
+				//to do save info in file 
 				cin.get();
 				system("cls");
 				break;
@@ -50,6 +51,8 @@ void App::run()
 				usr.showGoods(goods);
 				cin.get();
 				system("cls");
+				break;
+			case 3:
 				break;
 			case 0:
 				exit = true;

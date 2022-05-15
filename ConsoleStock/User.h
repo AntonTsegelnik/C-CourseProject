@@ -1,6 +1,6 @@
 #pragma once
 class User
 {
-	virtual int getMenyType() = 0;
+	virtual int getMenuType() = 0;
 };
 

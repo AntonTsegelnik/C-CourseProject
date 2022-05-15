@@ -4,6 +4,6 @@ class Admin :
     public User
 {
 public:
-    int getMenyType();
+    int getMenuType();
 };
 

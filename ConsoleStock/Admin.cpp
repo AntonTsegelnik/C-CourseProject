@@ -1,6 +1,6 @@
 #include "Admin.h"
 
-int Admin::getMenyType()
+int Admin::getMenuType()
 {
     return 0;
 }

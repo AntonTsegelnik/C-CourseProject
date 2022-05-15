@@ -13,6 +13,9 @@ private:
 
 
 public:
+	Goods():id(0),type(""),name(""),amount(0),admissionDate(""),shelfLife(""),buildingId(0) {};
+	Goods(int i, std::string t, std::string n, double a, std::string ad, std::string s, int b):id(i),type(t),name(n),amount(a),admissionDate(ad),shelfLife(s),buildingId(b) {};
+	//~Goods() {};
 	int getId();
 	void setId();
 	std::string getType();
@@ -27,6 +30,7 @@ public:
 	void setShelfLife();
 	int getBuildingId();
 	void setBuildingId();
+	virtual void toThink() = 0;
 
 	
 };

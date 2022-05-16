@@ -29,7 +29,7 @@ public:
 	std::string getShelfLife();
 	void setShelfLife();
 	int getBuildingId();
-	void setBuildingId();
+	void setBuildingId(int a);
 	virtual void toThink() = 0;
 
 	

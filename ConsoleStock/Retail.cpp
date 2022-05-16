@@ -1,4 +1,7 @@
 #include "Retail.h"
-void toThink ()  {
-	
+
+
+
+void Retail::toThink()
+{
 }

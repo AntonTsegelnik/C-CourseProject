@@ -9,9 +9,9 @@ class Expeditor :
     public User
 {
 public:
-    void createGoods(std::list<std::unique_ptr<Goods>>& goods);
-    void showGoods(std::list<std::unique_ptr<Goods>>& goods);
-    void addGoodsToBuilding();
+    void createGoods(std::list<std::shared_ptr<Goods>>& goods, std::list<std::shared_ptr<Building>>& buildings);
+    void showGoods(std::list<std::shared_ptr<Goods>>& goods);
+    static void addGoodsToBuilding(std::shared_ptr<Goods>& goods, std::list<std::shared_ptr<Building>>& buildings);
     int showMenu();
 };
 

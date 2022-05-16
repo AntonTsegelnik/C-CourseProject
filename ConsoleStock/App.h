@@ -11,13 +11,12 @@
 
 class App
 {	
-	std::list<std::unique_ptr<Goods>> goods;
-	//std::list<std::unique_ptr<Building>> buildings;
+	std::list<std::shared_ptr<Goods>> goods;
+	std::list<std::shared_ptr<Building>> buildings;
 	Storage _storage;
 public:
 	int authorization();
 	void run();
-	void showMenu(int x, int&choice);
 };
 
 

@@ -1,6 +1,7 @@
 #include "Expeditor.h"
 #include "Liquids.h"
 #include "Retail.h"
+#include "Input.h"
 
 
 
@@ -62,7 +63,28 @@ void Expeditor::addGoodsToBuilding()
 
 }
 
-int Expeditor::getMenuType()
+
+int Expeditor::showMenu()
 {
-	return 1;
+	int choice;
+	bool exit = false;
+
+	
+		INPUT
+		(
+			std::cout
+			<< "\t\tМеню\n"
+			<< "\t*****************************************************\n"
+			<< "\t1. Создать товар в базе данных\n"
+			<< "\t2. Вывод отчета\n"
+			<< "\t3. Удаление данных из отчета\n"
+			<< "\t4. Редактирование содержимого\n"
+			<< "\t5. Сохранить информацию в файл\n"
+			<< "\t6. Сортировка публикаций по цене\n"
+			<< "\t7. Поиск публикации\n"
+			<< "\t0. Выход\n"
+			<< "\t*****************************************************\n",
+			choice
+		);
+		return choice;
 }

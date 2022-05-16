@@ -4,6 +4,7 @@ class Admin :
     public User
 {
 public:
-    int getMenuType();
+
+    int showMenu();
 };
 

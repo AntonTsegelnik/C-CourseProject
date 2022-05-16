@@ -14,52 +14,71 @@ void App::run()
 {
 	int choice;
 	bool exit = false;
+	bool exit2;
 
-	if (authorization() == 0) {
-		Admin admin;
-		while (!exit)
+	while (!exit) {
+		INPUT(
+			std::cout
+			<< "\t      Меню\n"
+			<<"\t*******************\n"
+			<< "\t1.Авторизация\n" 
+			<< "\t2.Выход\n"
+			<< "\t*******************\n",
+			choice,
+		);
+		exit2 = false;
+		switch (choice)
 		{
-			showMenu(admin.getMenuType(), choice);
+		case 1:
+			system("cls");
+			if (authorization() == 0) {
+				Admin admin;
+				while(!exit2){
+				int chc = admin.showMenu();
+				switch (chc)
+				{
+				case 1:
+					_storage.addUser();
+					break;
 
-			switch (choice)
-			{
-			case 1:
-				_storage.addUser();
-				break;
-
-			case 0:
-				exit = true;
+				case 0:
+					exit2 = true;
+				}
 			}
-		}
-	}
-	else {
-		Expeditor usr;
-		
-		while (!exit)
-		{
-			showMenu(usr.getMenuType(), choice);
-		
-			switch (choice)
-			{
-			case 1:
-				usr.createGoods(goods);
-				//to do save info in file 
-				cin.get();
-				system("cls");
-				break;
-			case 2:
-				usr.showGoods(goods);
-				cin.get();
-				system("cls");
-				break;
-			case 3:
-				break;
-			case 0:
-				exit = true;
+
 			}
+			else {
+				Expeditor usr;
+				while (!exit2)
+				{	
+					system("cls");
+					int chc = usr.showMenu();
+					switch (chc)
+					{
+					case 1:
+						system("cls");
+						usr.createGoods(goods);
+						//to do save info in file 
+						cin.get();
+						system("cls");
+						break;
+					case 2:
+						usr.showGoods(goods);
+						cin.get();
+						system("cls");
+						break;
+					case 3:
+						break;
+					case 0:
+						system("cls");
+						exit2 = true;
+					}
+				}
+			}
+			break;
+		case 2:
+			exit = true;
 		}
-
-
 	
 	
 	}

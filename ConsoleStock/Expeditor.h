@@ -12,6 +12,6 @@ public:
     void createGoods(std::list<std::unique_ptr<Goods>>& goods);
     void showGoods(std::list<std::unique_ptr<Goods>>& goods);
     void addGoodsToBuilding();
-    int getMenuType();
+    int showMenu();
 };
 

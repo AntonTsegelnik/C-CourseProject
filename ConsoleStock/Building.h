@@ -7,7 +7,7 @@ class Building
 {
 	int id;
 	std::string address;
-	std::list<std::unique_ptr<Goods>> bGoods;
+	std::list<std::shared_ptr<Goods>> bGoods;
 public:
 	Building() :id(0), address(""), bGoods(0) {};
 	//Building(int i, std::string a, std::list<std::unique_ptr<Goods>> b) :id(i), address(a), bGoods(b) {};
@@ -16,8 +16,8 @@ public:
 	void setId();
 	std::string getAddress();
 	void setAddress();
-	std::list<std::unique_ptr<Goods>> getbGoods();
-	void setbGoods(std::unique_ptr<Goods> a);
+	std::list<std::shared_ptr<Goods>> getbGoods();
+	void setbGoods(std::shared_ptr<Goods> a);
 
 };
 

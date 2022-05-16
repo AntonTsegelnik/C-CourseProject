@@ -3,25 +3,23 @@
 #include "Retail.h"
 #include "Input.h"
 #include "Stock.h"
+#include "Storehouse.h"
+//#include <synchapi.h>
 
 
 
 
 
-void Expeditor::createGoods(std::list<std::unique_ptr<Goods>> &goods, std::list<std::unique_ptr<Building>>& buildings)
+void Expeditor::createGoods(std::list<std::shared_ptr<Goods>> &goods, std::list<std::shared_ptr<Building>>& buildings)
 {
-	std::unique_ptr<Building> tr(new Stock());
-	(*tr).setAddress(); std::cout << std::endl;
-	(*tr).setId(); std::cout << std::endl;
-	(*tr).setbGoods(0);
-	buildings.push_back(move(tr));
+	
 	int n;
 	std::cout << "Выберите категорию товара для добавления:\n 1.Жидкости\n 2.Розничные\n";
 	std::cin >> n;
 	switch (n) {
 	case 1: {
 		
-		std::unique_ptr<Goods> ptr(new Liquids());
+		std::shared_ptr<Goods> ptr(new Liquids());
 		(*ptr).setType("Жидкость");
 		(*ptr).setId(); std::cout << std::endl;
 		(*ptr).setName(); std::cout << std::endl;
@@ -29,17 +27,16 @@ void Expeditor::createGoods(std::list<std::unique_ptr<Goods>> &goods, std::list<
 		(*ptr).setAdmissionDate(); std::cout << std::endl;
 		(*ptr).setShelfLife(); std::cout << std::endl;
 		(*ptr).setBuildingId(1); std::cout << std::endl;
-		goods.push_back(move(ptr));
-		for (auto& item : buildings) {
-			if (item.get()->getId() == (*ptr).getBuildingId()) {
-				item.get()->setbGoods(move(ptr));
-			}
-		}
+		goods.push_back(ptr);
+		std::cout << "Идет добавление товара в Stock..." << std::endl;
+		//Sleep(3000);
+		addGoodsToBuilding(ptr, buildings);
+		
 
 		break;
 	}
 	case 2: {
-		std::unique_ptr<Goods> ptr(new Retail());
+		std::shared_ptr<Goods> ptr(new Retail());
 		(*ptr).setType("Розница");
 		(*ptr).setId(); std::cout << std::endl;
 		(*ptr).setName(); std::cout << std::endl;
@@ -47,7 +44,10 @@ void Expeditor::createGoods(std::list<std::unique_ptr<Goods>> &goods, std::list<
 		(*ptr).setAdmissionDate(); std::cout << std::endl;
 		(*ptr).setShelfLife(); std::cout << std::endl;
 		(*ptr).setBuildingId(2); std::cout << std::endl;
-		goods.push_back(move(ptr));
+		goods.push_back(ptr);
+		std::cout << "Идет добавление товара в Storehouse..." << std::endl;		
+		addGoodsToBuilding(ptr, buildings);
+	//	Sleep(3000);
 		break;
 	}
 	}
@@ -55,7 +55,7 @@ void Expeditor::createGoods(std::list<std::unique_ptr<Goods>> &goods, std::list<
 }
 
 
-void Expeditor::showGoods(std::list<std::unique_ptr<Goods>>& goods)
+void Expeditor::showGoods(std::list<std::shared_ptr<Goods>>& goods)
 {
 	for (auto& item : goods) {
 		std::cout<< std::endl;
@@ -70,13 +70,17 @@ void Expeditor::showGoods(std::list<std::unique_ptr<Goods>>& goods)
 	}
 }
 
-//void Expeditor::addGoodsToBuilding(std::list<std::unique_ptr<Goods>>& goods, std::list<std::unique_ptr<Building>>& buildings)
-//{
-//	/*for (auto& item : goods) {
-//		if(item.get()->getBuildingId() == )
-//	}*/
-//
-//}
+ void Expeditor::addGoodsToBuilding(std::shared_ptr<Goods> & goods, std::list<std::shared_ptr<Building>>& buildings)
+{
+	
+
+	for (auto& item : buildings) {
+		if (item.get()->getId() == (*goods).getBuildingId()) {
+			item.get()->setbGoods(goods);
+		}
+	}
+
+}
 
 
 
@@ -93,7 +97,7 @@ int Expeditor::showMenu()
 			<< "\t*****************************************************\n"
 			<< "\t1. Создать товар в базе данных\n"
 			<< "\t2. Вывод отчета\n"
-			<< "\t3. Удаление данных из отчета\n"
+			<< "\t3. Просмотр всех складов\n"
 			<< "\t4. Редактирование содержимого\n"
 			<< "\t5. Сохранить информацию в файл\n"
 			<< "\t6. Сортировка публикаций по цене\n"

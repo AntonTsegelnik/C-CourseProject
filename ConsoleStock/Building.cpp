@@ -27,12 +27,14 @@ void Building::setAddress()
 	getline(std::cin, address);
 }
 
-std::list<std::unique_ptr<Goods>> Building::getbGoods()
+std::list<std::shared_ptr<Goods>> Building::getbGoods()
 {
-	return move(bGoods);
+	return bGoods;
 }
 
-void Building::setbGoods(std::unique_ptr<Goods> a)
+void Building::setbGoods(std::shared_ptr<Goods> a)
 {
-	bGoods.push_back(move(a));
+	bGoods.push_back(a);
 }
+
+

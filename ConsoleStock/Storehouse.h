@@ -3,6 +3,7 @@
 class Storehouse :
     public Building
 {
+    void  toDo();
 
 };
 

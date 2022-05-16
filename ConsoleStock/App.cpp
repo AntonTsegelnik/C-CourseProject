@@ -70,7 +70,7 @@ void App::run()
 					case 1:
 						system("cls");
 						usr.createGoods(goods, buildings);
-						//to do save info in file 
+						usr.saveInFile(goods);
 						cin.get();
 						system("cls");
 						break;

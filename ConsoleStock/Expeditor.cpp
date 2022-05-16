@@ -70,6 +70,20 @@ void Expeditor::showGoods(std::list<std::shared_ptr<Goods>>& goods)
 	}
 }
 
+void Expeditor::saveInFile(std::list<std::shared_ptr<Goods>>& goods)
+{
+	std::fstream inFile;
+	inFile.open("goods.dat", std::ios::out | std::ios::trunc);
+	if (inFile.is_open()) {
+		inFile << goods;
+		inFile.close();
+		std::cout << "Данные успешно записаны\n";
+	}
+	else {
+		std::cout << "Файл не удалось открыть\n";
+	}
+}
+
  void Expeditor::addGoodsToBuilding(std::shared_ptr<Goods> & goods, std::list<std::shared_ptr<Building>>& buildings)
 {
 	
@@ -107,4 +121,16 @@ int Expeditor::showMenu()
 			choice
 		);
 		return choice;
+}
+
+
+
+std::ostream& operator<<(std::ostream& os, std::list<std::shared_ptr<Goods>>& goods)
+{
+	for (const auto& i : goods)
+	{
+		os <<i.get()->getId() << " " << i.get()->getType() << " " << i.get()->getName() << " "
+			<< i.get()->getAdmissionDate() << " " << i.get()->getShelfLife() << " " << i.get()->getBuildingId()<<"\n&"<<std:: endl;
+	}
+	return os;
 }

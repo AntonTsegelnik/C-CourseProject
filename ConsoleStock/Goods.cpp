@@ -84,3 +84,17 @@ void Goods::setBuildingId(int a)
 {
 	buildingId = a;
 }
+std::istream& operator>>(std::istream& is, std::shared_ptr<Goods>& goods)
+{
+	while (is.good())
+	{
+		std::shared_ptr<Goods> ptr;
+
+		is >> ptr.get()->setId() >> goods._amount >> goods._price;
+		p.AddGoodsToStorage(goods);
+		is.get();
+		is.peek();
+	}
+
+	return is;
+}

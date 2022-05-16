@@ -80,12 +80,7 @@ int Goods::getBuildingId()
 	return buildingId;
 }
 
-void Goods::setBuildingId()
+void Goods::setBuildingId(int a)
 {
-	INPUT_CONDITION
-	(
-		std::cout << "Идентификационный номер склада:",
-		buildingId,
-		buildingId >= 0,
-		);
+	buildingId = a;
 }

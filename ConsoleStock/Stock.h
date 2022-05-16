@@ -3,6 +3,6 @@
 class Stock :
     public Building
 {
-
+    void  toDo();
 };
 

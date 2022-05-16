@@ -4,9 +4,7 @@ class Retail :
     public Goods
 {
     
-    void toThink() {
-        setAmount();
-    };
+    void toThink();
 };
 
 

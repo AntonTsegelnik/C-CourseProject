@@ -12,7 +12,7 @@
 class App
 {	
 	std::list<std::unique_ptr<Goods>> goods;
-	//std::list<std::unique_ptr<Building>> buildings;
+	std::list<std::unique_ptr<Building>> buildings;
 	Storage _storage;
 public:
 	int authorization();

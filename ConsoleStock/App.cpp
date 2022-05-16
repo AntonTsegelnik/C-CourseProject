@@ -57,7 +57,7 @@ void App::run()
 					{
 					case 1:
 						system("cls");
-						usr.createGoods(goods);
+						usr.createGoods(goods, buildings);
 						//to do save info in file 
 						cin.get();
 						system("cls");

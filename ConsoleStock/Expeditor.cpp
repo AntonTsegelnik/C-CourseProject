@@ -2,13 +2,19 @@
 #include "Liquids.h"
 #include "Retail.h"
 #include "Input.h"
+#include "Stock.h"
 
 
 
 
 
-void Expeditor::createGoods(std::list<std::unique_ptr<Goods>> &goods)
-{	
+void Expeditor::createGoods(std::list<std::unique_ptr<Goods>> &goods, std::list<std::unique_ptr<Building>>& buildings)
+{
+	std::unique_ptr<Building> tr(new Stock());
+	(*tr).setAddress(); std::cout << std::endl;
+	(*tr).setId(); std::cout << std::endl;
+	(*tr).setbGoods(0);
+	buildings.push_back(move(tr));
 	int n;
 	std::cout << "Выберите категорию товара для добавления:\n 1.Жидкости\n 2.Розничные\n";
 	std::cin >> n;
@@ -22,8 +28,14 @@ void Expeditor::createGoods(std::list<std::unique_ptr<Goods>> &goods)
 		(*ptr).setAmount(); std::cout << std::endl;
 		(*ptr).setAdmissionDate(); std::cout << std::endl;
 		(*ptr).setShelfLife(); std::cout << std::endl;
-		(*ptr).setBuildingId(); std::cout << std::endl;
+		(*ptr).setBuildingId(1); std::cout << std::endl;
 		goods.push_back(move(ptr));
+		for (auto& item : buildings) {
+			if (item.get()->getId() == (*ptr).getBuildingId()) {
+				item.get()->setbGoods(move(ptr));
+			}
+		}
+
 		break;
 	}
 	case 2: {
@@ -34,7 +46,7 @@ void Expeditor::createGoods(std::list<std::unique_ptr<Goods>> &goods)
 		(*ptr).setAmount(); std::cout << std::endl;
 		(*ptr).setAdmissionDate(); std::cout << std::endl;
 		(*ptr).setShelfLife(); std::cout << std::endl;
-		(*ptr).setBuildingId(); std::cout << std::endl;
+		(*ptr).setBuildingId(2); std::cout << std::endl;
 		goods.push_back(move(ptr));
 		break;
 	}
@@ -58,10 +70,14 @@ void Expeditor::showGoods(std::list<std::unique_ptr<Goods>>& goods)
 	}
 }
 
-void Expeditor::addGoodsToBuilding()
-{
+//void Expeditor::addGoodsToBuilding(std::list<std::unique_ptr<Goods>>& goods, std::list<std::unique_ptr<Building>>& buildings)
+//{
+//	/*for (auto& item : goods) {
+//		if(item.get()->getBuildingId() == )
+//	}*/
+//
+//}
 
-}
 
 
 int Expeditor::showMenu()

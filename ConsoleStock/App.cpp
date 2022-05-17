@@ -35,6 +35,7 @@ void App::run()
 		case 1:
 			system("cls");
 			if (authorization() == 0) {
+				system("cls");
 				Admin admin;
 				while(!exit2){
 				int chc = admin.showMenu();
@@ -48,13 +49,19 @@ void App::run()
 				case 3:
 					break;
 				case 4:
+					system("cls");
 					admin.createBuilding(buildings);
 					break;
 				case 5:
+
 					admin.showBuildings(buildings);
+					cin.get();
+					system("cls");
 					break;
 				case 0:
+					system("cls");
 					exit2 = true;
+
 				}
 			}
 
@@ -81,6 +88,27 @@ void App::run()
 						break;
 					case 3:
 						usr.showBuildings(buildings);
+						cin.get();
+						system("cls");
+						break;
+					case 4:
+						try
+						{
+							usr.editGoods(goods);
+							usr.saveInFile(goods);
+						}
+						catch (const std::exception& e)
+						{
+							std::cout << e.what() << std::endl;
+							cin.get();
+						}
+						
+						system("cls");
+						break;
+					case 5:
+						usr.deleteGoods(goods,buildings);
+						usr.saveInFile(goods);
+						system("cls");
 						break;
 					case 0:
 						system("cls");

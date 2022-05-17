@@ -27,7 +27,7 @@ void Building::setAddress()
 	getline(std::cin, address);
 }
 
-std::list<std::shared_ptr<Goods>> Building::getbGoods()
+std::list<std::shared_ptr<Goods>>& Building::getbGoods()
 {
 	return bGoods;
 }

@@ -16,7 +16,7 @@ public:
 	void setId();
 	std::string getAddress();
 	void setAddress();
-	std::list<std::shared_ptr<Goods>> getbGoods();
+	std::list<std::shared_ptr<Goods>>& getbGoods();
 	void setbGoods(std::shared_ptr<Goods> a);
 
 };

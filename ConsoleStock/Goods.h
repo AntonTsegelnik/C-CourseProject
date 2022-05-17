@@ -34,4 +34,4 @@ public:
 
 	
 };
-std::istream& operator >> (std::istream& is, std::shared_ptr<Goods>& goods);
+//std::istream& operator >> (std::istream& is, std::shared_ptr<Goods>& goods);

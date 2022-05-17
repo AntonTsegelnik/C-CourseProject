@@ -4,11 +4,26 @@
 #include "Input.h"
 #include "Stock.h"
 #include "Storehouse.h"
-//#include <synchapi.h>
+#include <algorithm>
 
 
-
-
+std::ostream& operator<<(std::ostream& os, std::list<std::shared_ptr<Goods>>& goods)
+{
+	for (const auto& i : goods)
+	{
+		os << i.get()->getId() << " " << i.get()->getType() << " " << i.get()->getName() << " "
+			<< i.get()->getAdmissionDate() << " " << i.get()->getShelfLife() << " " << i.get()->getBuildingId() << "\n&" << std::endl;
+	}
+	return os;
+}
+void addGoodsToBuilding(std::shared_ptr<Goods>& goods, std::list<std::shared_ptr<Building>>& buildings)
+{
+	for (auto& item : buildings) {
+		if (item.get()->getId() == (*goods).getBuildingId()) {
+			item.get()->setbGoods(goods);
+		}
+	}
+}
 
 void Expeditor::createGoods(std::list<std::shared_ptr<Goods>> &goods, std::list<std::shared_ptr<Building>>& buildings)
 {
@@ -84,17 +99,6 @@ void Expeditor::saveInFile(std::list<std::shared_ptr<Goods>>& goods)
 	}
 }
 
- void Expeditor::addGoodsToBuilding(std::shared_ptr<Goods> & goods, std::list<std::shared_ptr<Building>>& buildings)
-{
-	
-
-	for (auto& item : buildings) {
-		if (item.get()->getId() == (*goods).getBuildingId()) {
-			item.get()->setbGoods(goods);
-		}
-	}
-
-}
 
 
 
@@ -108,29 +112,116 @@ int Expeditor::showMenu()
 		(
 			std::cout
 			<< "\t\tМеню\n"
-			<< "\t*****************************************************\n"
-			<< "\t1. Создать товар в базе данных\n"
-			<< "\t2. Вывод отчета\n"
-			<< "\t3. Просмотр всех складов\n"
-			<< "\t4. Редактирование содержимого\n"
-			<< "\t5. Сохранить информацию в файл\n"
-			<< "\t6. Сортировка публикаций по цене\n"
-			<< "\t7. Поиск публикации\n"
-			<< "\t0. Выход\n"
-			<< "\t*****************************************************\n",
+			<< "\t*****************************************\n"
+			<< "\t|1. Создать товар в базе данных        |\n"
+			<< "\t|2. Вывод отчета о всех товарах        |\n"
+			<< "\t|3. Просмотр всех складов              |\n"
+			<< "\t|4. Редактирование данных о товаре     |\n "
+			<< "\t|5. Удаление товара из базы данных     |\n "
+			<< "\t|6. Сортировка публикаций по цене      |\n "
+			<< "\t|7. Поиск публикации					 |\n "
+			<< "\t|0. Выход                              |\n "
+			<< "\t*****************************************\n",
 			choice
 		);
 		return choice;
 }
 
+void Expeditor::editGoods(std::list<std::shared_ptr<Goods>>& goods)
+{	
+	int find = false;
+	int exit = false;
+	std::string n ="  \n\n|========================================|\
+						\n|1. Изменить идентификационный номер     |\
+						\n|2. Изменить название                    |\
+						\n|3. Изменить дату поступления на склад   |\
+						\n|4. Изменить дату окнчания срока годности|\
+						\n|0. Выйти                                |\
+					    \n|========================================|\n";
+	int id;
+	int choice;
+	std::cout << "Id товара для изменения: \n";
+	std::cin >> id;
+	for (auto& item : goods) {
+		if (item.get()->getId() == id) {
+			find = true;
+			while (!exit) {
+				INPUT(
+					std::cout
+					<< n,
+					choice
+				);
+				switch (choice)
+				{
+				case 1:
+					item.get()->setId();
+					std::cout << "Данные успешно изменены\n";
+					system("cls");
+					break;
+				case 2:
+					item.get()->setName();
+					std::cout << "Данные успешно изменены\n";
+					system("cls");
+					break;
+				case 3:
+					item.get()->setAdmissionDate();
+					std::cout << "Данные успешно изменены\n";
+					system("cls");
 
-
-std::ostream& operator<<(std::ostream& os, std::list<std::shared_ptr<Goods>>& goods)
-{
-	for (const auto& i : goods)
-	{
-		os <<i.get()->getId() << " " << i.get()->getType() << " " << i.get()->getName() << " "
-			<< i.get()->getAdmissionDate() << " " << i.get()->getShelfLife() << " " << i.get()->getBuildingId()<<"\n&"<<std:: endl;
+					break;
+				case 4:
+					item.get()->setShelfLife();
+					std::cout << "Данные успешно изменены\n";
+					system("cls");
+					break;
+				case 0:
+					exit = true;
+					return;
+				}
+			}
+			
+		}
+		//if (find==0) std::cout << "Нет такого товара\n ";
+		throw std::exception("Нет такого товара");
 	}
-	return os;
+
 }
+
+void Expeditor::deleteGoods(std::list<std::shared_ptr<Goods>>& goods, std::list<std::shared_ptr<Building>>& buildings)
+{	
+	int find = false;
+	std::list<std::shared_ptr<Goods>>::iterator item = goods.begin();
+	int id;
+	std::cout << "Id товара для удаления: \n";
+	std::cin >> id;
+	for (; item != goods.end(); item++) {
+		if (item->get()->getId() == id) {
+			goods.erase(item);
+			std::cout << "Данные успешно удалены\n";
+			find = true;
+			break;
+		}
+	}
+
+	for (auto& item : buildings) {
+		auto it = find_if(item->getbGoods().begin(), item->getbGoods().end(), [id](const std::shared_ptr<Goods>& w) {return w->getId() == id; });
+		if (it != item->getbGoods().end()) {
+			item->getbGoods().erase(it);
+		}
+	}
+	
+	if (find == 0) { "Товар не найден\n"; }
+}
+
+void Expeditor::searchGoods(std::list<std::shared_ptr<Goods>>& goods)
+{
+	for (auto& item : goods) {
+
+	}
+}
+
+
+
+
+
+

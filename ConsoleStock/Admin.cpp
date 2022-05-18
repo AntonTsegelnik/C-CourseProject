@@ -16,6 +16,7 @@ int Admin::showMenu()
 			<< "\t3. Вывод отчета всех пользователей\n"
 			<< "\t4. Добавление склада\n"
 			<< "\t5. Просмотр всех складов\n"
+			<< "\t6. Удаление склада\n"
 			<< "\t0. Выход\n"
 			<< "\t*****************************************************\n",
 			choice;
@@ -47,6 +48,30 @@ void Admin::createBuilding(std::list<std::shared_ptr<Building>>& buildings)
 		//(*ttr).setbGoods();
 		buildings.push_back(ttr);
 	}
+}
+void Admin::deleteBuilding(std::list<std::shared_ptr<Building>>& buildings, std::list<std::shared_ptr<Goods>>& goods)
+{
+	int find = false;
+	std::list<std::shared_ptr<Building>>::iterator item = buildings.begin();
+	int id;
+	std::cout << "Id склада для удаления: \n";
+	std::cin >> id;
+	for (; item != buildings.end(); item++) {
+		if (item->get()->getId() == id) {
+			buildings.erase(item);
+			std::cout << "Данные успешно удалены\n";
+			find = true;
+			break;
+		}
+	}
+
+
+		auto it = find_if(goods.begin(), goods.end(), [id](const std::shared_ptr<Goods>& w) {return w->getBuildingId() == id; });
+		if (it != goods.end()) {
+			goods.erase(it);
+		}
+
+	if (find == 0) { std::cout<<"Товар не найден\n"; }
 }
 
 

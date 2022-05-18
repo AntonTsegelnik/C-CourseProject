@@ -9,8 +9,9 @@ class Admin :
 {
 public:
 
-    int showMenu();
+    int showMenu() override;
     void createBuilding(std::list<std::shared_ptr<Building>> &buildings);
+    void deleteBuilding(std::list<std::shared_ptr<Building>> &buildings, std::list<std::shared_ptr<Goods>>& goods);
   
 };
 

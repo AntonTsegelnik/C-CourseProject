@@ -58,6 +58,18 @@ void App::run()
 					cin.get();
 					system("cls");
 					break;
+				case 6:
+
+					admin.deleteBuilding(buildings,goods);
+					cin.get();
+					system("cls");
+					break;
+					case 7:
+
+					admin.deleteBuilding(buildings,goods);
+					cin.get();
+					system("cls");
+					break;
 				case 0:
 					system("cls");
 					exit2 = true;
@@ -96,19 +108,39 @@ void App::run()
 						{
 							usr.editGoods(goods);
 							usr.saveInFile(goods);
+							cin.get();
+							system("cls");
+						}
+						catch (const std::exception& e)
+						{
+							std::cout << e.what() << std::endl;
+							cin.get();
+							system("cls");
+
+						}
+						
+						break;
+					case 5:
+						usr.deleteGoods(goods,buildings);
+						usr.saveInFile(goods);
+						system("cls");
+						break;
+					case 6:
+						try
+						{
+							usr.searchGoods(goods);
 						}
 						catch (const std::exception& e)
 						{
 							std::cout << e.what() << std::endl;
 							cin.get();
 						}
-						
 						system("cls");
 						break;
-					case 5:
-						usr.deleteGoods(goods,buildings);
-						usr.saveInFile(goods);
-						system("cls");
+					case 7:	
+							usr.sortGoods(goods);					
+							cin.get();
+							system("cls");
 						break;
 					case 0:
 						system("cls");

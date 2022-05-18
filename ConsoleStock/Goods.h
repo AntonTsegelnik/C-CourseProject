@@ -32,6 +32,6 @@ public:
 	void setBuildingId(int a);
 	virtual void toThink() = 0;
 
-	
+//	bool operator <(shared_ptr<Goods> &l, shared_ptr<Goods>&r)
 };
 //std::istream& operator >> (std::istream& is, std::shared_ptr<Goods>& goods);

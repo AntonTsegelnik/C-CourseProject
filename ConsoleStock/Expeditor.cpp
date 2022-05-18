@@ -112,16 +112,16 @@ int Expeditor::showMenu()
 		(
 			std::cout
 			<< "\t\tМеню\n"
-			<< "\t*****************************************\n"
+			<< "\t****************************************\n"
 			<< "\t|1. Создать товар в базе данных        |\n"
 			<< "\t|2. Вывод отчета о всех товарах        |\n"
 			<< "\t|3. Просмотр всех складов              |\n"
 			<< "\t|4. Редактирование данных о товаре     |\n "
 			<< "\t|5. Удаление товара из базы данных     |\n "
-			<< "\t|6. Сортировка публикаций по цене      |\n "
-			<< "\t|7. Поиск публикации					 |\n "
+			<< "\t|6. Поиск публикации                   |\n "
+			<< "\t|7. Сортировка товаров по ID           |\n "
 			<< "\t|0. Выход                              |\n "
-			<< "\t*****************************************\n",
+			<< "\t****************************************\n",
 			choice
 		);
 		return choice;
@@ -214,10 +214,144 @@ void Expeditor::deleteGoods(std::list<std::shared_ptr<Goods>>& goods, std::list<
 }
 
 void Expeditor::searchGoods(std::list<std::shared_ptr<Goods>>& goods)
-{
-	for (auto& item : goods) {
+{	
+	int exit = false;
+	std::string name;
+	
+	std::string n = " \n\n|========================================|\
+					    \n|1. Поиск по id						   |\
+						\n|2. Поиск по названию                    |\
+						\n|3. Поиск по дате поступления на склад   |\
+						\n|4. Поиск по дате окнчания срока годности|\
+						\n|0. Выйти                                |\
+					    \n|========================================|\n";
+	int id;
+	int choice;
 
+
+	while (!exit) {
+
+		INPUT(
+			std::cout
+			<< n,
+			choice
+		);
+		switch (choice)
+		{
+		case 1:
+			system("cls");
+			int id;
+			std::cout << "Поиск: ";
+			std::cin >> id;
+			for (auto& item : goods) {
+				if (item->getId() == id) {
+					std::cout << std::endl;
+					std::cout << "**************************************" << std::endl;
+					std::cout << "|идентификационный номер: " << (*item).getId() << std::endl;
+					std::cout << "|тип товара: " << (*item).getType() << std::endl;
+					std::cout << "|название товара: " << (*item).getName() << std::endl;
+					std::cout << "|дата поступления на склад: " << (*item).getAdmissionDate() << std::endl;
+					std::cout << "|дата окнчания срока годности: " << (*item).getShelfLife() << std::endl;
+					std::cout << "|идентификационный номер склада: " << (*item).getBuildingId() << std::endl;
+					std::cout << "****************************************";
+				}
+			}
+
+			break;
+		case 2:
+			system("cls");
+		
+			std::cout << "Поиск: ";
+			getline(std::cin, name);
+			getc(stdin);
+			for (auto& item : goods) {
+				if (item->getName() == name) {
+					std::cout << std::endl;
+					std::cout << "***************************************" << std::endl;
+					std::cout << "|идентификационный номер: " << (*item).getId() << std::endl;
+					std::cout << "|тип товара: " << (*item).getType() << std::endl;
+					std::cout << "|название товара: " << (*item).getName() << std::endl;
+					std::cout << "|дата поступления на склад: " << (*item).getAdmissionDate() << std::endl;
+					std::cout << "|дата окнчания срока годности: " << (*item).getShelfLife() << std::endl;
+					std::cout << "|идентификационный номер склада: " << (*item).getBuildingId() << std::endl;
+					std::cout << "****************************************";
+				}
+			}
+
+			break;
+		case 3:
+
+			system("cls");
+			std::cout << "Поиск: ";
+			getline(std::cin, name);
+			getc(stdin);
+			for (auto& item : goods) {
+				if (item->getAdmissionDate() == name) {
+					std::cout << std::endl;
+					std::cout << "***************************************" << std::endl;
+					std::cout << "|идентификационный номер: " << (*item).getId() << std::endl;
+					std::cout << "|тип товара: " << (*item).getType() << std::endl;
+					std::cout << "|название товара: " << (*item).getName() << std::endl;
+					std::cout << "|дата поступления на склад: " << (*item).getAdmissionDate() << std::endl;
+					std::cout << "|дата окнчания срока годности: " << (*item).getShelfLife() << std::endl;
+					std::cout << "|идентификационный номер склада: " << (*item).getBuildingId() << std::endl;
+					std::cout << "****************************************";
+				}
+			}
+	
+			break;
+		case 4:
+
+			system("cls");
+			std::cout << "Поиск: ";
+			getline(std::cin, name);
+			getc(stdin);
+			for (auto& item : goods) {
+				if (item->getShelfLife() == name) {
+					std::cout << std::endl;
+					std::cout << "***************************************" << std::endl;
+					std::cout << "|идентификационный номер: " << (*item).getId() << std::endl;
+					std::cout << "|тип товара: " << (*item).getType() << std::endl;
+					std::cout << "|название товара: " << (*item).getName() << std::endl;
+					std::cout << "|дата поступления на склад: " << (*item).getAdmissionDate() << std::endl;
+					std::cout << "|дата окнчания срока годности: " << (*item).getShelfLife() << std::endl;
+					std::cout << "|идентификационный номер склада: " << (*item).getBuildingId() << std::endl;
+					std::cout << "****************************************";
+				}
+			}
+
+			break;
+		case 0:
+			exit = true;
+			return;
+		}
 	}
+	throw std::exception("Нет такого товара");
+
+}
+
+void Expeditor::sortGoods(std::list<std::shared_ptr<Goods>>& goods)
+{	
+	int choice;
+	INPUT(
+		std::cout
+		<< "1.По возрастанию\n"
+		<< "2.По убыванию\n",
+		choice;
+	);
+	switch (choice)
+	{
+	case 1 : 
+		goods.sort([](std::shared_ptr<Goods >& a, std::shared_ptr<Goods>& b) {return a->getId() < b->getId(); });
+		break;
+	case 2:
+		goods.sort([](std::shared_ptr<Goods >& a, std::shared_ptr<Goods>& b) {return a->getId() < b->getId(); });
+		goods.reverse();
+		break;
+	default:
+		break;
+	}
+	
 }
 
 
